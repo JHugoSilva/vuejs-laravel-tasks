@@ -79,7 +79,12 @@ class Task extends Model
 
         $totalTask = Task::countProjectTask($projectId);
         $totalCompletedTask = Task::countCompletedTask($projectId);
+        print_r($totalCompletedTask);
+        if ($totalCompletedTask == '0') {
+            $totalCompletedTask = 1;
+        }
         $progress = Task::aroundNumber(($totalCompletedTask * 100)/ $totalTask);
+        print_r($progress);
         $taskProgress = TaskProgress::where('projectId', $projectId)->first();
 
         if (!is_null($taskProgress)) {
